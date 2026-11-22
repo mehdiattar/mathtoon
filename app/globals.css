@@ -1,26 +1,573 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --ink: #263451;
+  --muted: #71809a;
+  --background: #f7f8ff;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+* {
+  box-sizing: border-box;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
+  margin: 0;
   background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  color: var(--ink);
+  font-family: Tahoma, "Vazirmatn", sans-serif;
+}
+
+button,
+a {
+  font: inherit;
+}
+
+a {
+  text-decoration: none;
+}
+
+.math-page {
+  max-width: 1440px;
+  min-height: 100vh;
+  margin: auto;
+  padding: 0 6%;
+  overflow: hidden;
+}
+
+.topbar {
+  height: 88px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--ink);
+}
+
+.brand-icon {
+  width: 54px;
+  height: 54px;
+  display: grid;
+  place-items: center;
+  border-radius: 18px;
+  background: #fff0d9;
+  font-size: 31px;
+}
+
+.brand strong,
+.brand small {
+  display: block;
+}
+
+.brand strong {
+  font-size: 21px;
+  font-weight: 900;
+}
+
+.brand small {
+  color: var(--muted);
+  font-size: 11px;
+  margin-top: 5px;
+}
+
+.topbar-label {
+  color: #66718d;
+  background: white;
+  border: 1px solid #edf0fa;
+  padding: 11px 17px;
+  border-radius: 30px;
+  font-size: 13px;
+}
+
+.hero {
+  position: relative;
+  min-height: 405px;
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  align-items: center;
+  gap: 30px;
+  padding: 36px 5%;
+  border-radius: 34px;
+  background: linear-gradient(120deg, #e9f5ff, #f4edff 55%, #fff1e8);
+  overflow: hidden;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+}
+
+.hero-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 15px;
+  border-radius: 30px;
+  background: #ffffffc9;
+  color: #63718c;
+  font-size: 12px;
+}
+
+.hero h1 {
+  font-size: clamp(29px, 4vw, 48px);
+  line-height: 1.65;
+  font-weight: 900;
+  margin: 18px 0 8px;
+  color: #293653;
+}
+
+.hero h1 span {
+  color: #7858d9;
+}
+
+.hero-content > p {
+  max-width: 540px;
+  color: #697792;
+  font-size: 14px;
+  line-height: 2.2;
+}
+
+.hero-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 20px;
+  margin-top: 14px;
+  padding: 14px 23px;
+  color: white;
+  background: #7759d9;
+  border-radius: 15px;
+  font-weight: bold;
+  font-size: 14px;
+  box-shadow: 0 8px 20px #7759d936;
+  transition: transform 0.2s;
+}
+
+.hero-button:hover {
+  transform: translateY(-3px);
+}
+
+.hero-stats {
+  display: flex;
+  gap: 35px;
+  margin-top: 32px;
+}
+
+.hero-stats div {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.hero-stats strong {
+  font-size: 22px;
+  color: #7559d4;
+}
+
+.hero-stats span {
+  font-size: 11px;
+  color: #77839b;
+}
+
+.hero-art {
+  min-height: 300px;
+  position: relative;
+  display: grid;
+  place-items: center;
+}
+
+.hero-circle {
+  width: 255px;
+  height: 255px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: linear-gradient(145deg, #ffdc9c, #ffb9a9);
+  box-shadow: 0 20px 40px #d48c8c2b;
+}
+
+.owl-character {
+  font-size: 150px;
+  filter: drop-shadow(0 10px 5px #00000015);
+  animation: owl-float 3s ease-in-out infinite;
+}
+
+.speech-bubble {
+  position: absolute;
+  top: 20px;
+  right: 5%;
+  padding: 14px 20px;
+  border-radius: 18px;
+  background: white;
+  color: #6654b4;
+  text-align: center;
+  font-size: 13px;
+  line-height: 1.9;
+  font-weight: bold;
+  box-shadow: 0 8px 25px #4d4b7c16;
+}
+
+.sun-decoration {
+  position: absolute;
+  top: 5px;
+  left: 15%;
+  font-size: 43px;
+}
+
+.star {
+  position: absolute;
+  color: #f6ad35;
+  font-size: 35px;
+}
+
+.star-one {
+  top: 40px;
+  left: 10%;
+}
+
+.star-two {
+  bottom: 15px;
+  right: 10%;
+}
+
+.floating-math {
+  position: absolute;
+  display: grid;
+  place-items: center;
+  width: 45px;
+  height: 45px;
+  border-radius: 14px;
+  background: white;
+  box-shadow: 0 8px 20px #00000012;
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.math-one {
+  bottom: 30px;
+  left: 12%;
+  color: #f08b4c;
+}
+
+.math-two {
+  top: 100px;
+  right: 5%;
+  color: #4b9ed2;
+}
+
+.math-three {
+  bottom: 25px;
+  right: 18%;
+  color: #8d65ce;
+}
+
+@keyframes owl-float {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-3deg);
+  }
+  50% {
+    transform: translateY(-12px) rotate(3deg);
+  }
+}
+
+.learning-section {
+  padding: 65px 0 40px;
+}
+
+.section-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 28px;
+}
+
+.section-eyebrow {
+  color: #8b70d9;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.section-heading h2 {
+  font-size: 27px;
+  margin: 8px 0;
+  font-weight: 900;
+}
+
+.section-heading p {
+  color: var(--muted);
+  font-size: 13px;
+  margin: 0;
+}
+
+.map-decoration {
+  font-size: 42px;
+}
+
+.chapter-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 19px;
+}
+
+.chapter-card {
+  min-height: 205px;
+  padding: 22px;
+  border-radius: 23px;
+  border: 1px solid #ffffff;
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s;
+}
+
+.chapter-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px #313d5a12;
+}
+
+.chapter-card.blue {
+  background: #e5f2ff;
+}
+
+.chapter-card.pink {
+  background: #ffebf1;
+}
+
+.chapter-card.orange {
+  background: #fff0df;
+}
+
+.chapter-card.purple {
+  background: #f0eaff;
+}
+
+.chapter-card.green {
+  background: #e4f7ed;
+}
+
+.chapter-card.yellow {
+  background: #fff6d9;
+}
+
+.chapter-card.cyan {
+  background: #e1f7f8;
+}
+
+.chapter-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.chapter-number {
+  padding: 7px 12px;
+  border-radius: 20px;
+  background: #ffffffb8;
+  color: #65728a;
+  font-size: 11px;
+  font-weight: bold;
+}
+
+.chapter-icon {
+  font-size: 35px;
+}
+
+.chapter-card h3 {
+  font-size: 17px;
+  font-weight: 900;
+  margin: 18px 0 8px;
+}
+
+.chapter-card > p {
+  color: #71809a;
+  font-size: 12px;
+  margin: 0;
+}
+
+.chapter-card-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 22px;
+}
+
+.chapter-card-bottom > span {
+  color: #68758c;
+  font-size: 11px;
+}
+
+.chapter-card-bottom button {
+  width: 35px;
+  height: 35px;
+  border: none;
+  border-radius: 12px;
+  background: #ffffffc9;
+  color: #58627a;
+  font-size: 21px;
+  cursor: pointer;
+}
+
+.adventure-banner {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin: 25px 0 45px;
+  padding: 25px 30px;
+  border-radius: 25px;
+  background: linear-gradient(110deg, #fff0d8, #f4eaff);
+}
+
+.banner-character {
+  font-size: 55px;
+}
+
+.adventure-banner h2 {
+  font-size: 17px;
+  margin: 0 0 8px;
+}
+
+.adventure-banner p {
+  font-size: 12px;
+  color: #78839a;
+  margin: 0;
+  line-height: 2;
+}
+
+.banner-star {
+  margin-right: auto;
+  font-size: 35px;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  padding: 25px 0;
+  border-top: 1px solid #e8eaf2;
+  color: #8993a8;
+  font-size: 11px;
+}
+
+@media (max-width: 850px) {
+  .hero {
+    grid-template-columns: 1fr 0.8fr;
+    padding: 30px;
+  }
+
+  .chapter-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .hero-circle {
+    width: 200px;
+    height: 200px;
+  }
+
+  .owl-character {
+    font-size: 120px;
+  }
+}
+
+@media (max-width: 600px) {
+  .math-page {
+    padding: 0 17px;
+  }
+
+  .topbar {
+    height: 72px;
+  }
+
+  .brand-icon {
+    width: 45px;
+    height: 45px;
+  }
+
+  .topbar-label {
+    padding: 9px 11px;
+    font-size: 10px;
+  }
+
+  .hero {
+    display: flex;
+    flex-direction: column;
+    padding: 28px 20px;
+    text-align: center;
+    gap: 15px;
+    border-radius: 25px;
+  }
+
+  .hero-content > p {
+    font-size: 12px;
+  }
+
+  .hero-stats {
+    justify-content: center;
+    gap: 25px;
+  }
+
+  .hero-art {
+    width: 100%;
+    min-height: 245px;
+  }
+
+  .hero-circle {
+    width: 185px;
+    height: 185px;
+  }
+
+  .owl-character {
+    font-size: 110px;
+  }
+
+  .speech-bubble {
+    top: 0;
+    right: 0;
+  }
+
+  .section-heading h2 {
+    font-size: 22px;
+  }
+
+  .chapter-grid {
+    grid-template-columns: 1fr;
+    gap: 13px;
+  }
+
+  .chapter-card {
+    min-height: 180px;
+  }
+
+  .adventure-banner {
+    padding: 20px 15px;
+    gap: 12px;
+  }
+
+  .banner-character {
+    font-size: 40px;
+  }
+
+  .adventure-banner h2 {
+    font-size: 14px;
+  }
+
+  .adventure-banner p {
+    font-size: 10px;
+  }
+
+  .banner-star {
+    font-size: 23px;
+  }
+
+  .footer {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
 }
