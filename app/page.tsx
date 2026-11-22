@@ -3,7 +3,7 @@ import { chapters, toPersian } from "@/data/chapters";
 
 export default function Home() {
   const totalTopics = chapters.reduce(
-    (sum, chapter) => sum + chapter.topics,
+    (sum, chapter) => sum + chapter.topics.length,
     0,
   );
 
@@ -109,7 +109,7 @@ export default function Home() {
               <p>{chapter.description}</p>
 
               <div className="chapter-card-bottom">
-                <span>📚 {toPersian(chapter.topics)} موضوع آموزشی</span>
+                <span>📚 {toPersian(chapter.topics.length)} موضوع آموزشی</span>
                 <Link
                   href={`/chapters/${chapter.id}`}
                   className="chapter-link"

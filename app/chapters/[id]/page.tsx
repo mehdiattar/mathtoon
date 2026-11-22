@@ -2,6 +2,12 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { chapters, toPersian } from "@/data/chapters";
 
+export function generateStaticParams() {
+  return chapters.map((chapter) => ({
+    id: String(chapter.id),
+  }));
+}
+
 type Props = {
   params: Promise<{ id: string }>;
 };
