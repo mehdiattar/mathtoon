@@ -1,69 +1,10 @@
-const chapters = [
-  {
-    id: 1,
-    title: "عددنویسی و الگوها",
-    topics: 4,
-    icon: "🔢",
-    color: "blue",
-    description: "ماجراجویی در شهر اعداد",
-  },
-  {
-    id: 2,
-    title: "کسر",
-    topics: 5,
-    icon: "🍫",
-    color: "pink",
-    description: "سفر به سرزمین شکلات‌ها",
-  },
-  {
-    id: 3,
-    title: "نسبت، تناسب و درصد",
-    topics: 4,
-    icon: "⚖️",
-    color: "orange",
-    description: "آزمایشگاه تناسب",
-  },
-  {
-    id: 4,
-    title: "تقارن و چندضلعی‌ها",
-    topics: 4,
-    icon: "🔷",
-    color: "purple",
-    description: "شهر شگفت‌انگیز شکل‌ها",
-  },
-  {
-    id: 5,
-    title: "عددهای اعشاری",
-    topics: 4,
-    icon: "🧮",
-    color: "green",
-    description: "کارخانه عددهای اعشاری",
-  },
-  {
-    id: 6,
-    title: "اندازه‌گیری",
-    topics: 4,
-    icon: "📏",
-    color: "yellow",
-    description: "سرزمین مهندسان کوچک",
-  },
-  {
-    id: 7,
-    title: "آمار و احتمال",
-    topics: 3,
-    icon: "🎲",
-    color: "cyan",
-    description: "آزمایشگاه شانس و آمار",
-  },
-];
-
-const toPersian = (value: number) =>
-  value.toLocaleString("fa-IR");
+import Link from "next/link";
+import { chapters, toPersian } from "@/data/chapters";
 
 export default function Home() {
   const totalTopics = chapters.reduce(
     (sum, chapter) => sum + chapter.topics,
-    0
+    0,
   );
 
   return (
@@ -98,8 +39,8 @@ export default function Home() {
           </h1>
 
           <p>
-            همراه جغد دانا به سرزمین‌های شگفت‌انگیز ریاضی سفر کن.
-            داستان ببین، کشف کن و با بازی کردن قهرمان ریاضی شو!
+            همراه جغد دانا به سرزمین‌های شگفت‌انگیز ریاضی سفر کن. داستان ببین،
+            کشف کن و با بازی کردن قهرمان ریاضی شو!
           </p>
 
           <a href="#chapters" className="hero-button">
@@ -168,16 +109,14 @@ export default function Home() {
               <p>{chapter.description}</p>
 
               <div className="chapter-card-bottom">
-                <span>
-                  📚 {toPersian(chapter.topics)} موضوع آموزشی
-                </span>
-                <button
-                  type="button"
-                  aria-label={`انتخاب فصل ${chapter.title}`}
-                  title="به‌زودی"
+                <span>📚 {toPersian(chapter.topics)} موضوع آموزشی</span>
+                <Link
+                  href={`/chapters/${chapter.id}`}
+                  className="chapter-link"
+                  aria-label={`ورود به فصل ${chapter.title}`}
                 >
                   ←
-                </button>
+                </Link>
               </div>
             </article>
           ))}
@@ -188,9 +127,7 @@ export default function Home() {
         <div className="banner-character">🦉</div>
         <div>
           <h2>هر مسئله، یک ماجراجویی تازه!</h2>
-          <p>
-            آماده شو تا با کمک دوستانت رازهای دنیای ریاضی را کشف کنی.
-          </p>
+          <p>آماده شو تا با کمک دوستانت رازهای دنیای ریاضی را کشف کنی.</p>
         </div>
         <span className="banner-star">⭐</span>
       </section>
