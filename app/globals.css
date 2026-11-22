@@ -18,7 +18,7 @@ body {
   margin: 0;
   background: var(--background);
   color: var(--ink);
-  font-family: Tahoma, "Vazirmatn", sans-serif;
+  font-family: "Vazirmatn", Tahoma, sans-serif;
 }
 
 button,
